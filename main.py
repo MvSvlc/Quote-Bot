@@ -99,7 +99,7 @@ async def quote(ctx):
     time_obj = datetime.strptime(time_str[0], '%m%d%y')
     time_stamp = time_obj.strftime('%B %d, %Y')
 
-    await send_embed(ctx, file_content,'', discord.Color.random(), member.nick(), member.avatar_url, time_stamp)
+    await send_embed(ctx, file_content,'', discord.Color.random(), member.nick, member.avatar_url, time_stamp)
 
 def create_dir(str):
     try:
