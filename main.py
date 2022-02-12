@@ -93,14 +93,13 @@ async def quote(ctx):
     file_name = os.path.splitext(file_name_extension)[0]
 
     member = await commands.MemberConverter().convert(ctx, created_user)
-
     file_content = rand_file.read()
 
     time_str = file_name.split(' ')
     time_obj = datetime.strptime(time_str[0], '%m%d%y')
     time_stamp = time_obj.strftime('%B %d, %Y')
 
-    await send_embed(ctx, file_content,'', discord.Color.random(), member, member.avatar_url, time_stamp)
+    await send_embed(ctx, file_content,'', discord.Color.random(), member.nick(), member.avatar_url, time_stamp)
 
 def create_dir(str):
     try:
