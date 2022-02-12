@@ -22,7 +22,7 @@ async def on_ready():
     print('Attempting to create \'All\' folder...')
     create_dir(all_path)
 
-    client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='to all your thoughts'))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='to all your thoughts'))
 
     print('{0.user} is Online!'.format(client))
 
