@@ -34,8 +34,7 @@ def create_table(conn, create_table_sql):
 def create_insert_sql(conn, name, quote):
     try:
         c = conn.cursor()
-        sql = f'INSERT INTO quotes(name, quote, create_date) VALUES (\'{name}\', \'{quote}\', DATE(\'now\'));'
-        c.execute(sql)
+        c.execute('INSERT INTO quotes(name, quote, create_date) VALUES (?, ?, DATE(\'now\'))', (name, quote))
         conn.commit()
     except sqlite3.Error as error:
         print('[ERROR] Unable to insert into table - ', error)
@@ -116,7 +115,7 @@ async def quote(ctx):
     time_obj = datetime.strptime(date, '%Y-%m-%d')
     time_stamp = time_obj.strftime('%B %d, %Y')
 
-    await send_embed(ctx, content,'', discord.Color.random(), member.display_name, member.avatar_url, time_stamp)
+    await send_embed(ctx, f'\"{content}\"','', discord.Color.random(), member.display_name, member.avatar_url, time_stamp)
     print(f'[SUCCESS] Successfully retrieved quote - @{member.display_name}: \'{content}\'')
 
 def get_rand_sql(conn):
