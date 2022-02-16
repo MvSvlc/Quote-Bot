@@ -77,7 +77,7 @@ async def add(ctx, user: discord.User, *args):
     await send_embed(ctx, ':repeat:\tAttempting to create quote...\t:repeat:', '', discord.Color.teal(), '', '')
     await asyncio.sleep(3)
 
-    if user is None:
+    if user is None or user is not type(discord.User):
         await send_embed(ctx,f':x:\tUnable to locate {user}\t:x:', 'Must tag user', discord.Color.red(),'','')
         print('[ERROR] Unable to located user')
         return
@@ -100,11 +100,14 @@ async def quote(ctx, user: discord.User = None):
             return
         await send_quote(ctx, sql_object)
     else:
-        sql_object = get_rand_sql(conn, user.id)
-        if sql_object is None:
-            await send_embed(ctx, f':x:\tThere are currently no quotes stored for {user.display_name}\t:x:', f'Try adding one with !add @{user} <quote>!', discord.Color.red(), '','')
-            return
-        await send_quote(ctx, sql_object)
+        try:
+            sql_object = get_rand_sql(conn, user.id)
+            if sql_object is None:
+                await send_embed(ctx, f':x:\tThere are currently no quotes stored for {user.display_name}\t:x:', f'Try adding one with !add @{user} <quote>!', discord.Color.red(), '','')
+                return
+            await send_quote(ctx, sql_object)
+        except commands.UserNotFound as err:
+            await send_embed(ctx, f':x:\tUnable to locate user : {user.display_name}\t:x:', 'Please make sure to use the correct @', discord.Color.red(),'','')
 
 
 async def send_quote(ctx, sql_obj):
