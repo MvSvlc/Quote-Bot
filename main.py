@@ -67,10 +67,6 @@ async def on_ready():
 
 @client.command()
 async def add(ctx, user: discord.User, *args):
-    
-    if not isinstance(user, discord.User):
-        await send_embed(ctx, f':x:\tUnable to locate user : {user.display_name}\t:x:', 'Please make sure to use the correct @', discord.Color.red(),'','')
-        return
 
     if len(args) < 1:
         await send_embed(ctx, ':x:\tUnable to process command\t:x:', '!add @user <quote>', discord.Color.red(), '', '')
@@ -95,10 +91,6 @@ async def add(ctx, user: discord.User, *args):
 @client.command()
 async def quote(ctx, user: discord.User = None):
 
-    if not isinstance(user, discord.User):
-        await send_embed(ctx, f':x:\tUnable to locate user : {user.display_name}\t:x:', 'Please make sure to use the correct @', discord.Color.red(),'','')
-        return
-        
     print('[INFO] Attempting to retrieve quote...')
 
     if user is None:
