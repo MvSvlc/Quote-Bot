@@ -1,7 +1,6 @@
 import asyncio
 from datetime import datetime
 import os
-from re import A, T
 import sqlite3
 import discord
 from discord.ext import commands
@@ -34,7 +33,7 @@ def create_table(conn, create_table_sql):
 
 def create_insert_sql(conn, name, quote):
     try:
-        c = conn.cursor()
+        c = conn.cursor(prepared=True)
         c.execute('INSERT INTO quotes(name, quote, create_date) VALUES (?, ?, DATE(\'now\'))', (name, quote))
         conn.commit()
     except sqlite3.Error as error:

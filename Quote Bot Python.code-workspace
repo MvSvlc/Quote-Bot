@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"previewLimit": 50,
+				"driver": "SQLite",
+				"name": "QUOTESQL",
+				"database": "${workspaceFolder:QuoteBot}/sql.db"
+			}
+		],
+		"sqltools.useNodeRuntime": true
+	}
+}
