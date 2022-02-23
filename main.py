@@ -34,7 +34,7 @@ def create_table(conn, create_table_sql):
 def create_insert_sql(conn, name, quote):
     try:
         c = conn.cursor()
-        c.execute('INSERT INTO quotes(name, quote, create_date) VALUES (%s, %s, DATE(\'now\'))', (name, quote,))
+        c.execute('INSERT INTO quotes(name, quote, create_date) VALUES (?, ?, DATE(\'now\'))', (name, quote,))
         conn.commit()
     except sqlite3.Error as error:
         print('[ERROR] Unable to insert into table - ', error)
